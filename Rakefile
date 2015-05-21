@@ -1,17 +1,17 @@
 require 'rspec/core/rake_task'
 require "bundler/gem_tasks"
 require "fileutils"
-require './lib/dur'
+require './lib/cakery'
 
 #Gem things
 #############################################################################
 #Upgrade version of gem
 def upgrade_version
-  versionf = './lib/dur/version.rb'
+  versionf = './lib/cakery/version.rb'
   require versionf
 
   #Upgrade version '0.0.1' => '0.0.2'
-  version = dur::VERSION
+  version = cakery::VERSION
   new_version = version.split(".")
   new_version[2] = new_version[2].to_i + 1
   new_version = new_version.join(".")
@@ -30,9 +30,9 @@ task :push do
   `git push`
   `git tag #{version}`
   `git push origin #{version}`
-  `gem build dur.gemspec`
-  `gem push dur-#{version}.gem`
-  `rm dur-#{version}.gem`
+  `gem build cakery.gemspec`
+  `gem push cakery-#{version}.gem`
+  `rm cakery-#{version}.gem`
 end
 
 #############################################################################
