@@ -5,7 +5,7 @@ require 'cakery/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "cakery"
-  spec.version       = cakery::VERSION
+  spec.version       = Cakery::VERSION
   spec.authors       = ["seo"]
   spec.email         = ["seotownsend@icloud.com"]
   spec.summary       = "A boring javascript application framework"
