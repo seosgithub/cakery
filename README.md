@@ -1,4 +1,4 @@
-![dur: Say goodbye to path issues](https://raw.githubusercontent.com/sotownsend/dur/master/logo.png)
+![dur: Say goodbye to file path issues](https://raw.githubusercontent.com/sotownsend/dur/master/logo.png)
 
 [![Gem Version](https://badge.fury.io/rb/iarrogant.svg)](http://badge.fury.io/rb/dur)
 [![Build Status](https://travis-ci.org/sotownsend/dur.svg)](https://travis-ci.org/sotownsend/dur)
