@@ -1,36 +1,15 @@
-![flok: The eventful application framework](https://raw.githubusercontent.com/sotownsend/flok/master/logo.png)
+![dur: Say goodbye to path issues](https://raw.githubusercontent.com/sotownsend/dur/master/logo.png)
 
-[![Gem Version](https://badge.fury.io/rb/iarrogant.svg)](http://badge.fury.io/rb/flok)
-[![Build Status](https://travis-ci.org/sotownsend/flok.svg)](https://travis-ci.org/sotownsend/flok)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/sotownsend/flok/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-[![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/sotownsend/flok/blob/master/LICENSE)
+[![Gem Version](https://badge.fury.io/rb/iarrogant.svg)](http://badge.fury.io/rb/dur)
+[![Build Status](https://travis-ci.org/sotownsend/dur.svg)](https://travis-ci.org/sotownsend/dur)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/sotownsend/dur/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/sotownsend/dur/blob/master/LICENSE)
 
 # What is this?
 
-A work in progress
-
-# Supported platforms
- * iOS 8 (iPhone)
- * HTML5
+A work in progress. Purpose built for our continuous integration & deployment infrastructure at Fittr®.
 
 ## Docs
-
- * [Project Layout](./docs/project_layout.md)
- * [Architecture](./docs/architecture.md)
- * [Compilation](./docs/compilation.md)
- * [Messaging](./docs/messaging.md)
- * [Drivers](./docs/drivers.md)
- * [Kernel API](./docs/kernel_api.md)
- * [Rake Tasks](./docs/rakefile.md)
- * [Interactive (Mostly debugging)](./docs/interactive.md)
- * [Testing](./docs/testing.md)
- * [Modules](./docs/modules.md)
-  * [Event (event.js)](./mod/event.md) - Send and receive events to arbitrary objects
-  * [User Interface (ui.js)](./mod/ui.md) - Support displaying views and view hierarchies
-  * [Net (net.js)](./mod/net.md) - Support asynchronous network connections
-  * [Timer (timer.js)](./mod/timer.md) - A tick to keep the system up-to-date and support timeout callbacks
-  * [Persistance (store.js)](./mod/store.md) - A way to store data in a key value system as well as larger blobs
-  * [Transitions (transition.js)](./mod/transition.md) - Works with `ui` to provide interception of segues
 
 ## Requirements
 
@@ -46,16 +25,16 @@ A work in progress
 ## Installation
 
 RVM users:
-Run `gem install flok`
+Run `gem install dur`
 
-System ruby installation?
-Run `sudo gem install flok`
+System ruby installation:
+Run `sudo gem install dur`
 
 ---
 
 ## FAQ
 
-### When should I use flok?
+### When should I use dur?
 
 Todo
 
@@ -71,4 +50,4 @@ Fittr is a SaaS company that focuses on providing personalized workouts and heal
 
 ## License
 
-flok is released under the MIT license. See LICENSE for details.
+dur is released under the MIT license. See LICENSE for details.
