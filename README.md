@@ -7,24 +7,7 @@
 
 # What is this?
 
-cakery helps you with file path issues; never worry again about relative paths with cakery's helper methods.
-Purpose built for our continuous integration & deployment infrastructure at Fittr®.
-
-## File, pwd, and project relative
-There are 3 relative ways of looking at a path in *cakery*.
-  * File Relative - A path relative to the current code file
-  * pwd Relative - A path relative to the current `pwd` pointer
-  * project Relative - A path relative to a project root (think rails)
-
-## Usage
-cakery's path helpers work by re-opening the string class to include a set of helper methods. Various
-other methods are put into the global object space.
-
-## String Extension Methods
-  * `fr` (File relative) - Returns an absolute path from the relative string given assuming the current file is the origin.
-  * `pr(file)` (Project relative) - Returns an absolute path from the relative string given assuming the first ancestor folder containing `file` is the origin
-
-## 
+Combine many files into one.
 
 ### Examples
 ```ruby
