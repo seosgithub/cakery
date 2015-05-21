@@ -1,4 +1,4 @@
-require './dur/version.rb'
+#require './dur/version.rb'
 
 module Dur
 
