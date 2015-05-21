@@ -1,15 +1,36 @@
-![dur: Say goodbye to file path issues](https://raw.githubusercontent.com/sotownsend/dur/master/logo.png)
+![cakery: Say goodbye to file path issues](https://raw.githubusercontent.com/sotownsend/cakery/master/logo.png)
 
-[![Gem Version](https://badge.fury.io/rb/iarrogant.svg)](http://badge.fury.io/rb/dur)
-[![Build Status](https://travis-ci.org/sotownsend/dur.svg)](https://travis-ci.org/sotownsend/dur)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/sotownsend/dur/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-[![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/sotownsend/dur/blob/master/LICENSE)
+[![Gem Version](https://badge.fury.io/rb/iarrogant.svg)](http://badge.fury.io/rb/cakery)
+[![Build Status](https://travis-ci.org/sotownsend/cakery.svg)](https://travis-ci.org/sotownsend/cakery)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/sotownsend/cakery/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+[![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/sotownsend/cakery/blob/master/LICENSE)
 
 # What is this?
 
-A work in progress. Purpose built for our continuous integration & deployment infrastructure at Fittr®.
+cakery helps you with file path issues; never worry again about relative paths with cakery's helper methods.
+Purpose built for our continuous integration & deployment infrastructure at Fittr®.
 
-## Docs
+## File, pwd, and project relative
+There are 3 relative ways of looking at a path in *cakery*.
+  * File Relative - A path relative to the current code file
+  * pwd Relative - A path relative to the current `pwd` pointer
+  * project Relative - A path relative to a project root (think rails)
+
+## Usage
+cakery's path helpers work by re-opening the string class to include a set of helper methods. Various
+other methods are put into the global object space.
+
+## String Extension Methods
+  * `fr` (File relative) - Returns an absolute path from the relative string given assuming the current file is the origin.
+  * `pr(file)` (Project relative) - Returns an absolute path from the relative string given assuming the first ancestor folder containing `file` is the origin
+
+## 
+
+### Examples
+```ruby
+#Open a file in the same directory as the first anscestor containing a .git file
+
+```
 
 ## Requirements
 
@@ -25,16 +46,16 @@ A work in progress. Purpose built for our continuous integration & deployment in
 ## Installation
 
 RVM users:
-Run `gem install dur`
+Run `gem install cakery`
 
 System ruby installation:
-Run `sudo gem install dur`
+Run `sudo gem install cakery`
 
 ---
 
 ## FAQ
 
-### When should I use dur?
+### When should I use cakery?
 
 Todo
 
@@ -50,4 +71,4 @@ Fittr is a SaaS company that focuses on providing personalized workouts and heal
 
 ## License
 
-dur is released under the MIT license. See LICENSE for details.
+cakery is released under the MIT license. See LICENSE for details.

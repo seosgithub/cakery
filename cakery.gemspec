@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'dur/version'
+require 'cakery/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "dur"
-  spec.version       = Dur::VERSION
+  spec.name          = "cakery"
+  spec.version       = cakery::VERSION
   spec.authors       = ["seo"]
   spec.email         = ["seotownsend@icloud.com"]
   spec.summary       = "A boring javascript application framework"
-  spec.description   = "dur is a cross-platform application framework system that exports javascript files"
-  spec.homepage      = "https://github.com/sotownsend/dur"
+  spec.description   = "cakery is a cross-platform application framework system that exports javascript files"
+  spec.homepage      = "https://github.com/sotownsend/cakery"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
