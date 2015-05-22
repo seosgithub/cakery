@@ -28,12 +28,12 @@ module Cakery
     end
 
     def method_missing name, *args, &block
-      if name =~ /=/
-        name = ('@'+name.to_s.gsub(/=/, "")).to_sym
-        self.instance_variable_set(name, args.first)
-      else
+      #if name =~ /=/
+        #name = ('@'+name.to_s.gsub(/=/, "")).to_sym
+        #self.instance_variable_set(name, args.first)
+      #else
         return CakeERBContextTwoClauseHelper.new(self, name)
-      end
+      #end
     end
 
     def get_binding
@@ -48,6 +48,31 @@ module Cakery
       @erb_context = erb_context
       @name = name
       @macros = []
+    end
+
+    def <(e)
+      vname = ('@'+@name.to_s.gsub(/=/, "")).to_sym
+      out = ""
+
+      #Append all files or it's a macro class
+      if e.class == String
+        out = e
+
+        #Run through each macro and run it in the reverse
+        #order that we put it in so that
+        #r.var << MyMacroA << MyMacroB << "./directory" will execute first MyMacroB and then MyMacroA
+        while macro = @macros.pop
+          out = macro.new.process(out)
+        end
+
+        @erb_context.instance_variable_set(vname, "") unless @erb_context.instance_variable_defined?(vname)
+        v = @erb_context.instance_variable_get(vname)
+        out = "\n" + out unless v == ""
+        v += out
+        @erb_context.instance_variable_set(vname, v)
+      else
+        raise "< operator needs a string, you passed #{e.inspect}"
+      end
     end
 
     def <<(e)
@@ -72,7 +97,6 @@ module Cakery
         v = @erb_context.instance_variable_get(vname)
         v += out
         @erb_context.instance_variable_set(vname, v)
-
       else
         #Assume it's a macro, save it onto the stack
         @macros << e

@@ -28,13 +28,12 @@ RSpec.describe "Baking" do
     secret = SecureRandom.hex
 
     c = Cakery.new(cp) do |r|
-      r.secret = secret
+      r.secret < secret
     end
 
     c.bake
     expect(c.src).to eq("#{secret}\n")
   end
-
 
   it "can use a directory append" do
     cp = cakery_path "test2"
@@ -106,6 +105,38 @@ RSpec.describe "Baking" do
     expect(c.src).to eq("goodbye world 1\ngoodbye world 2\n\n")
   end
 
+  it "supports macros via <" do
+    cp = cakery_path "test4"
+
+    class MyMacro < Cakery::Macro
+      def process str
+        out = ""
+        str.split("\n").each do |line|
+          if line =~ /hello/
+            out += line.gsub(/hello/, "goodbye")
+          else
+            out += line
+          end
+
+          out += "\n"
+        end
+        out
+      end
+    end
+
+    c = Cakery.new(cp) do |r|
+      r.secret << MyMacro < "hello world 1\ngoodbye world 2\n"
+    end
+
+    cd_proj "test4" do
+      c.bake
+    end
+
+    #Started out with hello world 1, goodbye world 2 -> goodbye world 1, goodbye world 2
+    expect(c.src).to eq("goodbye world 1\ngoodbye world 2\n\n")
+  end
+
+
   #it "supports stacked macros" do
     #cp = cakery_path "test4"
 
@@ -139,17 +170,65 @@ RSpec.describe "Baking" do
     #expect(c.src).to eq("fuck_you world 1\nfuck_you world 2\n\n")
   #end
 
-  #it "supports two dir sources to one variable" do
-    #cp = cakery_path "test5"
+  it "supports stacked macros" do
+    cp = cakery_path "test4"
 
-    #c = Cakery.new(cp) do |r|
-      #r.secret << "./secret1/*"
-      #r.secret << "./secret2/*"
-    #end
+    class MyMacro < Cakery::Macro
+      def process str
+        out = ""
+        str.split("\n").each do |line|
+          if line =~ /hello/
+            out += line.gsub(/hello/, "goodbye")
+          elsif line =~ /goodbye/
+            out += line.gsub(/goodbye/, "fuck_you")
+          else
+            out += line
+          end
 
-    #cd_proj "test5" do
-      #c.bake
-    #end
-    #expect(c.src).to eq("hello world\ngoodbye world\n\n")
-  #end
+          out += "\n"
+        end
+        out
+      end
+    end
+
+    c = Cakery.new(cp) do |r|
+      r.secret << MyMacro << MyMacro < "hello world 1\ngoodbye world 2\n\n"
+    end
+
+    cd_proj "test4" do
+      c.bake
+    end
+
+    #Started out with hello world 1, goodbye world 2 -> goodbye world 1, goodbye world 2
+    expect(c.src).to eq("fuck_you world 1\nfuck_you world 2\n\n")
+  end
+
+  it "supports two dir sources to one variable" do
+    cp = cakery_path "test5"
+
+    c = Cakery.new(cp) do |r|
+      r.secret << "./secret1/*"
+      r.secret << "./secret2/*"
+    end
+
+    cd_proj "test5" do
+      c.bake
+    end
+    expect(c.src).to eq("hello world\ngoodbye world\n\n")
+  end
+
+  it "supports two string sources to one variable" do
+    cp = cakery_path "test5"
+
+    c = Cakery.new(cp) do |r|
+      r.secret < "hello"
+      r.secret < "world"
+    end
+
+    cd_proj "test5" do
+      c.bake
+    end
+    expect(c.src).to eq("hello\nworld\n")
+  end
+
 end
