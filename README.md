@@ -17,15 +17,16 @@ In your ruby code:
 #Create a new recipe
 recipe = Cakery.new('test.js.erb') do |r|
   #The << operator means to glob the directory into a string in @spec
+  #The << operator accepts any unix style glob operator, e.g. /**/* for recursive
   r.spec << "./spec/*_spec.js"
-  
-  #You may use any unix style patterns
-  #e.g. combine all recursively
-  #  r.spec << "./spec/**/*_spec.js"
-  
+
   #The < operator means assignment
   r.debug < true
   r.foo < "bar"
+
+  #You can also append to things that are already set
+  r.foo < "bar2"
+  r.foo << "./foo/*"
 end
 
 #Build using the current directory
