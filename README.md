@@ -19,6 +19,10 @@ recipe = Cakery.new('test.js.erb') do |r|
   #The << operator means to glob the directory into a string in @spec
   r.spec << "./spec/*_spec.js"
   
+  #You may use any unix style patterns
+  #e.g. combine all recursively
+  #  r.spec << "./spec/**/*_spec.js"
+  
   #The < operator means assignment
   r.debug < true
   r.foo < "bar"
