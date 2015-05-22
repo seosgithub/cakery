@@ -5,38 +5,99 @@
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/sotownsend/cakery/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 [![License](http://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/sotownsend/cakery/blob/master/LICENSE)
 
-# What is this?
+##What is this?
 
-Combine many files into one.
+Combine many files into one intelligently.  Think about it as a more generic version of [Sprockets](https://github.com/sstephenson/sprockets).
 
-### Examples
+## Quick Start
+
+###Combine many js files in the `./spec` directory into one file
+In your ruby code:
 ```ruby
 #Create a new recipe
-moudle Cakery
-  class Macro
-    def process text
-    end
-  end
-end
-
-class MyMacro << Cakery::Macro
-  def process text
-  end
-end
-
-recipe = Cakery.new(:erb => 'test.cakery', :macros => [MyMacro]) do |r|
-  @init << MyMacro << "./spec/init/**/*.js"
-  @config << "./spec/config/**/*.js"
-
-  #Include all spec files
-  @spec << "./spec/**/*_spec.js"
+recipe = Cakery.new('test.js.erb') do |r|
+  #The << operator means to glob the directory into a string in @spec
+  r.spec << "./spec/*_spec.js"
+  
+  #The < operator means assignment
+  r.debug < true
+  r.foo < "bar"
 end
 
 #Build using the current directory
 cake = recipe.bake
 
-#Get the result of the build
-cake.src
+#Get the concatenated result of the build
+puts cake.src
+```
+
+Create a test.js.erb with:
+```erb
+<%= @spec %>
+
+<!-- Announce whether we are in debug or release -->
+<% if @debug %>
+  console.log("Debug!");
+<% end %>
+  console.log("Release :(");
+<% end %>
+```
+
+------
+
+###Macros
+Macros receive a block of text and then do something with that text.  A *macro* is a subclass of **Cakery::Macro** that implements **def process(str)** and returns a **String**. You can also stack macros.
+
+In your ruby code:
+```ruby
+#Create a new recipe
+class MyMacro < Cakery::Macro
+  def process str
+    out = ""
+    str.split("\n").each do |line|
+      if line =~ /hello/
+        out += line.gsub(/hello/, "goodbye")
+      else
+        out += line
+      end
+      out += "\n"
+    end
+    out
+  end
+end
+
+recipe = Cakery.new('test.js.erb') do |r|
+  #The << operator means to glob the directory into a string in @spec
+  r.spec << MyMacro << "./spec/*_spec.js"
+  r.spec << MyMacro < "hello"
+  
+  #Additionally, you can stack macros. Macros always use the << operator intra macros
+  #The last operator may either be < or <<
+  r.spec << MyMacro << MyOtherMacro < "Hello"
+  r.spec << MyMacro << MyOtherMacro << "./spec/*_spec.js"
+  
+  #The < operator means assignment
+  r.debug < true
+  r.foo < "bar"
+end
+
+#Build using the current directory
+cake = recipe.bake
+
+#Get the concatenated result of the build
+puts cake.src
+```
+
+Create a test.js.erb with:
+```erb
+<%= @spec %>
+
+<!-- Announce whether we are in debug or release -->
+<% if @debug %>
+  console.log("Debug!");
+<% end %>
+  console.log("Release :(");
+<% end %>
 ```
 
 ## Requirements
