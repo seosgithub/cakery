@@ -11,8 +11,32 @@ Combine many files into one.
 
 ### Examples
 ```ruby
-#Open a file in the same directory as the first anscestor containing a .git file
+#Create a new recipe
+moudle Cakery
+  class Macro
+    def process text
+    end
+  end
+end
 
+class MyMacro << Cakery::Macro
+  def process text
+  end
+end
+
+recipe = Cakery.new(:erb => 'test.cakery', :macros => [MyMacro]) do |r|
+  @init << MyMacro << "./spec/init/**/*.js"
+  @config << "./spec/config/**/*.js"
+
+  #Include all spec files
+  @spec << "./spec/**/*_spec.js"
+end
+
+#Build using the current directory
+cake = recipe.bake
+
+#Get the result of the build
+cake.src
 ```
 
 ## Requirements
