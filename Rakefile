@@ -11,7 +11,7 @@ def upgrade_version
   require versionf
 
   #Upgrade version '0.0.1' => '0.0.2'
-  version = cakery::VERSION
+  version = Cakery::VERSION
   new_version = version.split(".")
   new_version[2] = new_version[2].to_i + 1
   new_version = new_version.join(".")
