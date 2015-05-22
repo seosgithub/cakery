@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Cakery::VERSION
   spec.authors       = ["seo"]
   spec.email         = ["seotownsend@icloud.com"]
-  spec.summary       = "A boring javascript application framework"
-  spec.description   = "cakery is a cross-platform application framework system that exports javascript files"
+  spec.summary       = "Combine many files into one intelligently"
+  spec.description   = "Combine many files into one intelligently.  Cakery has a simple *DSL* that allows you to glob directories and pass strings to an **erb** file.  You can also add **macros** to a cakery pipeline. Think about it as a more generic version of [Sprockets](https://github.com/sstephenson/sprockets)."
   spec.homepage      = "https://github.com/sotownsend/cakery"
   spec.license       = "MIT"
 
