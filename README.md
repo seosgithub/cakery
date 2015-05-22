@@ -7,7 +7,7 @@
 
 ##What is this?
 
-Combine many files into one intelligently.  Think about it as a more generic version of [Sprockets](https://github.com/sstephenson/sprockets).
+Combine many files into one intelligently.  Cakery has a simple *DSL* that allows you to glob directories and pass strings to an **erb** file.  You can also add **macros** to a cakery pipeline. Think about it as a more generic version of [Sprockets](https://github.com/sstephenson/sprockets).
 
 ## Quick Start
 
